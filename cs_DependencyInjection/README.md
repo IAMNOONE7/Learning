@@ -20,8 +20,8 @@ with **Views**, **ViewModels**, and **Services** using the built-in
 - App.xaml.cs builds the DI container
 - MainWindow uses MainViewModel as DataContext.
 - MainViewModel has two commands:
- - GoHome = new RelayCommand(_ => nav.Navigate<HomeViewModel>());
- - GoSettings = new RelayCommand(_ => nav.Navigate<SettingsViewModel>());
+  - GoHome = new RelayCommand(_ => nav.Navigate<HomeViewModel>());
+  - GoSettings = new RelayCommand(_ => nav.Navigate<SettingsViewModel>());
 - NavigationService uses DI to create ViewModels.
 - NavigationStore holds the current ViewModel, and WPF updates automatically using DataTemplates.
 
