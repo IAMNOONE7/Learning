@@ -1,0 +1,19 @@
+# Compiled files
+*.exe
+*.dll
+*.obj
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Visual Studio / VSCode
+.vscode/
+.vs/
+bin/
+obj/
+
+# Environment / Dependencies
+.env
+venv/
+node_modules/
