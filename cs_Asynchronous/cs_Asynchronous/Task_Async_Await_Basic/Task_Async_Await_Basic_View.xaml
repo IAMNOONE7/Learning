@@ -1,0 +1,84 @@
+﻿<Window x:Class="cs_Asynchronous.Task_Async_Await_Basic.Task_Async_Await_Basic_View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cs_Asynchronous.Task_Async_Await_Basic"       
+        mc:Ignorable="d"
+        Title="Task_Async_Await_Basic_View" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local:Task_Async_Await_Basic_ViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>        
+        <local:InverseBooleanConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel Margin="16" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <Button x:Name="Btn"
+                  Content="Do async work (2s)"
+                  Click="Btn_Click"
+                  Height="32" />
+                <TextBlock x:Name="Status" Text="Ready." />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                <Button x:Name="Btn1"
+          Content="Do async work"
+          Click="Btn1_Click"
+          Height="32" />
+                <TextBlock x:Name="Status1" Text="Ready." />
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                <Button x:Name="Btn2"
+                  Content="Do async work"
+                  Click="Btn2_Click"
+                  Height="32" />
+                <TextBlock x:Name="Status2" Text="Ready." />
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="16" >
+                <Button Content="Start sequence"
+                         Command="{Binding StartCommand}"
+                         IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+                <TextBlock Text="{Binding StatusText}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <!-- Parallel downloads with Task.WhenAll -->
+            <Button Content="Parallel: download 3 pages"
+                    Height="50"
+                    Width="100"
+                    Margin="10,0,0,0"
+                    Command="{Binding StartParallelCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+           
+            <!-- Timeout + simple retry/backoff -->
+            <Button Content="Timeout + retry example"
+                    Height="50"
+                    Width="100"
+                    Margin="10,0,0,0"
+                    Command="{Binding StartRetryCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+
+            <!-- ProgressBar for bounded download demo -->
+            <ProgressBar Margin="10,8,0,0"
+                         Height="16"
+                         Minimum="0" Maximum="100"
+                         Value="{Binding ProgressPercent}"/>
+
+            <!-- Quick log to see steps & results -->
+            <ListBox Margin="10,8,0,0"
+                     Height="120"
+                     ItemsSource="{Binding Log}"/>
+        </StackPanel>
+    </StackPanel>
+   
+</Window>

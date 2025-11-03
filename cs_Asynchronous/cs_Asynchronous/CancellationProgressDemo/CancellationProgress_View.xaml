@@ -1,0 +1,45 @@
+﻿<Window x:Class="cs_Asynchronous.CancellationProgressDemo.CancellationProgress_View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cs_Asynchronous.CancellationProgressDemo"
+        mc:Ignorable="d"
+        Title="CancellationProgress_View" Height="450" Width="800">
+    <Window.DataContext>
+        <local:CancellationProgress_ViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+   
+    
+    <StackPanel Margin="16" >
+        <TextBlock Text="Cancellation + Progress (async)"
+                   FontWeight="Bold" FontSize="14"/>
+
+        <StackPanel Orientation="Horizontal" >
+            <Button Content="Start long work"
+                    Command="{Binding StartCommand}"
+                    Width="140"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}, FallbackValue=True}"/>
+
+            <Button Content="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Width="80"
+                    IsEnabled="{Binding IsBusy}" />
+        </StackPanel>
+
+        <!-- Progress bar -->
+        <ProgressBar Minimum="0" Maximum="100"
+                     Height="18"
+                     Value="{Binding ProgressPercent}" />
+
+        <!-- Status -->
+        <TextBlock Text="{Binding StatusText}" FontFamily="Consolas"/>
+
+        <!-- Log of steps -->
+        <ListBox ItemsSource="{Binding Log}" Height="220" FontFamily="Consolas"/>
+    </StackPanel>
+</Window>

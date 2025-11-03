@@ -1,0 +1,39 @@
+﻿<Window x:Class="cs_Asynchronous.AsyncStreamsDemo.AsyncStreamsDemo_View"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cs_Asynchronous.AsyncStreamsDemo"
+        mc:Ignorable="d"
+        Title="AsyncStreamsDemo_View" Height="450" Width="800">
+    <Window.DataContext>
+        <local:AsyncStreamsDemo_ViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+    </Window.Resources>
+
+    <StackPanel Margin="16" >
+        <TextBlock Text="Async Streams (IAsyncEnumerable)" 
+                   FontSize="14" FontWeight="Bold"/>
+
+        <StackPanel Orientation="Horizontal" >
+            <Button Content="Start streaming"
+                    Command="{Binding StartCommand}"
+                    Width="130"
+                    IsEnabled="{Binding IsStreaming, Converter={StaticResource InverseBoolConverter}, FallbackValue=True}"/>
+
+            <Button Content="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Width="80"
+                    IsEnabled="{Binding IsStreaming}" />
+        </StackPanel>
+
+        <TextBlock Text="{Binding StatusText}" FontFamily="Consolas"/>
+
+        <ListBox ItemsSource="{Binding Log}"
+                 Height="260"
+                 FontFamily="Consolas"/>
+    </StackPanel>
+</Window>
