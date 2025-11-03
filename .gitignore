@@ -12,6 +12,27 @@ __pycache__/
 .vs/
 bin/
 obj/
+Debug/
+Release/
+*.user
+*.suo
+*.cache
+*.pdb
+*.dbmdl
+*.opendb
+
+# Build artifacts
+*.dll
+*.exe
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ReSharper / Rider / JetBrains
+.idea/
+*.DotSettings.user
 
 # Environment / Dependencies
 .env

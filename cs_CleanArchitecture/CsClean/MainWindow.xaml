@@ -1,0 +1,46 @@
+﻿<Window x:Class="CsClean.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CsClean"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="12" DockPanel.Dock="Top" VerticalAlignment="Top" >
+            <TextBlock Text="Name:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox Width="200" Margin="0,0,12,0"
+                     Text="{Binding NewMessageName, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="First item:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox Width="300" Margin="0,0,12,0"
+                     Text="{Binding NewItemText, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Content="Add" Width="100" Command="{Binding AddCommand}" />
+            <Button Content="Reload" Width="100" Margin="12,0,0,0" Command="{Binding LoadCommand}" />
+        </StackPanel>
+
+        <!-- Main list with delete -->
+        <DockPanel Margin="12">
+            <Button Content="Remove Selected" DockPanel.Dock="Top" Width="160" Margin="0,0,0,8"
+                    Command="{Binding RemoveSelectedCommand}"/>
+
+            <ListBox ItemsSource="{Binding Messages}" SelectedItem="{Binding SelectedMessage, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <ItemsControl ItemsSource="{Binding Items}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text= "{Binding Message}" Margin="0,0,0,6"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </DockPanel>
+</Window>
