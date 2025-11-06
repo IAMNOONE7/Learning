@@ -1,0 +1,6 @@
+@cs_RestApiDemo_HostAddress = http://localhost:5074
+
+GET {{cs_RestApiDemo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
