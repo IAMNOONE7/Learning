@@ -38,3 +38,23 @@ Thumbs.db
 .env
 venv/
 node_modules/
+
+# === SQLite databases ===
+app.db
+*.sqlite
+*.sqlite3
+*.db
+
+# === Entity Framework migrations ===
+Migrations/
+
+# === Logs & temp files ===
+*.log
+*.tmp
+*.bak
+*.cache
+
+# === Configs / local files ===
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
