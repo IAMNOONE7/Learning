@@ -37,6 +37,7 @@ Thumbs.db
 # Environment / Dependencies
 .env
 venv/
+.venv/
 node_modules/
 
 # === SQLite databases ===
