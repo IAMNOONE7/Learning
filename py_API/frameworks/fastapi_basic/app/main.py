@@ -21,7 +21,7 @@ WHY this file exists:
 """
 
 from fastapi import FastAPI
-from .routes import books, auth
+from .routes import books, auth, rl_demo, bf_demo
 from .cache import close_redis
 import logging
 
@@ -41,6 +41,8 @@ def create_app() -> FastAPI:
         description="Learning project: basic REST API with FastAPI (Books & Reviews domain).",
     )
 
+    app.include_router(bf_demo.router)
+    app.include_router(rl_demo.router)
     app.include_router(auth.router)
     # Register routers – this keeps the code modular.
     app.include_router(books.router, prefix="/books", tags=["books"])

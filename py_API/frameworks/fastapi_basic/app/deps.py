@@ -9,7 +9,6 @@ from .security import decode_token
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")  # tells Swagger how to get a token
 
-
 async def get_current_user(
     token: str = Depends(oauth2_scheme),     # reads Authorization: Bearer <token>
     db: AsyncSession = Depends(get_db),      # DB session for user lookup
@@ -36,3 +35,4 @@ def require_role(required: str):
             raise HTTPException(status_code=403, detail="Forbidden")
         return user
     return _guard
+
